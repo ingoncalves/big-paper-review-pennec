@@ -213,6 +213,67 @@ bem como os possíveis problemas que podem surgir na estimação de parâmetros.
   \vspace{1em}
 \end{center}
 
+No contexto de estimação de parâmetros de variáveis aleatórias Gaussianas,
+busca-se estimar a média e a variância $\sigma$ da distribuição, uma vez que
+este modelo pode ser totalmente caracterizado por estas duas
+quantidades~\cite{kay}. Para este fim, diversos estimadores podem ser
+encontrados na literatura, tanto de natureza linear (\textit{Best Linear
+Unbiased Estimator}, \textit{Least Squares}, \textit{Wiener Filter}), quanto
+não-linear (\textit{General Minimum Variance Estimator}, \textit{Bayesian
+Estimators})\cite{kay,haykin}.
+
+Entretanto, para problemas de alta dimensão, encontrar uma formulação fechada
+para a distribuição Gaussiana em função do parâmetro desconhecido $\sigma$
+torna-se um desafio. A busca por estimadores ótimos naturalmente é desenvolvida
+na direção de se encontrar um minimizador para uma função de custo que,
+tipicamente, depende do modelo da distribuição dos dados\cite{kay}. Esta busca
+é em muito facilitada quando a função de custo é mais matematicamente tratável.
+Contudo, dependendo da natureza do problema, nem sempre é possível obter uma
+formulação analítica simplificada como entrada para o desenvolvimento de
+estimadores, recorrendo-se à alternativas numéricas para contornar esta
+limitação.
+
+Os autores evidenciam este problema na Equação~(6), onde pode-se notar
+a complexidade da formulação do fator de normalização $\zeta(\sigma)$. A
+técnica utilizada para avaliar $\zeta(\sigma)$ foi através da tabulação do
+valor da função para alguns valores de $\sigma$ utilizando integrações de Monte
+Carlo.  Este método de integração numérica utiliza números aleatórios para
+aproximar o valor da integral multivariada~(\cite{caflisch1998monte}).
+
+A avaliação do valor de $\zeta(\sigma)$ é de fundamental importância para
+estimar o parâmetro desconhecido $\sigma$ (variância da distribuição).
+ Um estimador tipicamente empregado para estimação de parâmetros
+de distribuições normais é o Estimador de Máxima Verossimilhança (MLE), o qual
+estima os valores dos diferentes parâmetros do modelo estatístico de maneira a
+maximizar a probabilidade dos dados observados, ou seja, busca-se parâmetros
+que maximizem a função de verossimilhança. A estimativa MLE da variância
+$\hat{\sigma_N}$ é dada pela solução da Equação~(8). Note que esta equação
+depende do valor de $\zeta(\sigma)$, o qual foi tabelado pela integração de
+Monte Carlo. Entretanto, esta aproximação apresenta instabilidades que degradam
+a eficiência da estimação $\hat{\sigma_N}$. O problema fica ainda pior quando
+se aumenta o valor da variância $\sigma$ ou da dimensão da variedade $m$.  
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-02-paragraph-02.png}}
+  \vspace{1em}
+\end{center}
+
+Aplicando-se uma transformação não-linear no parâmetro desconhecido $\sigma$,
+pode-se obter um função estritamente convexa sobre o parâmetro de forma com que
+sua derivada é uma função crescente (Equação~(9)). Esta manipulação matemática
+apresenta algumas vantagens do ponto de vista de otimização que tornam o
+problema mais tratável. Em especial, esta reformulação irá prover um
+instrumental matemático que possibilitará a análise de distribuições
+Riemannianas em variedades de altas dimensões, com ampla aplicação em problemas
+reais.
+
+%\begin{center}
+  %\vspace{1em}
+  %\frame{\includegraphics[width=0.8\linewidth]{figs/figure-1.png}}
+  %\vspace{1em}
+%\end{center}
+
 \bibliographystyle{ieeetr}
 \bibliography{refs}
 %bib/edge-linking,bib/deformable,bib/medical,bib/graphics,bib/texture,bib/imaging,bib/tracking,bib/shape-papers,bib/bib-header,bib/video,bib/math-books,bib/math,bib/psych-books,bib/metric,bib/edge,bib/leymarie_pami_scaffold,bib/vision-books,bib/vision,bib/nn-search,bib/multidimscaling,bib/psychophysics,bib/indexing,bib/segmentation,bib/image-databases,bib/shape-matching,bib/neuro,bib/skeleton,bib/skeleton2D,bib/aspect-graphs,bib/recognition,bib/surface-networks,bib/ridge,bib/proceedings,bib/perceptual-grouping,bib/continuation,bib/graph-matching-2,bib/cooper}
