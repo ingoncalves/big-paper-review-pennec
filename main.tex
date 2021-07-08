@@ -18,6 +18,9 @@
 \usepackage{macrosfabbri-basic}
 \usepackage{xcolor}
 
+\usepackage{tabularx}
+\usepackage{booktabs}
+
 % ------------------------------------------------------------------------------
 % Paper draft Comments and TODO's
 %
@@ -68,7 +71,19 @@ algumas construções básicas do \LaTeX\ como \emph{Theorem} ou
 
 \section{Tabela de Notação}
 
-This section has a summary of the notation used in the paper.
+\begin{table}[h]
+  \begin{tabularx}{\textwidth}{@{}XX@{}}
+    \toprule
+    $m$ & dimensão da variedade \\
+    $\mathcal{P}_m$ & variedade das SPD de dimensão $m$\\
+    $\mathcal{E}_N$ & erro médio quadrático\\
+    $d_R$ & distância Riemanniana\\
+    $\Gamma_m$ & distribuição Gamma multivariada\\
+    $p(C|\bar{C},\sigma)$ & distribuição Gaussiana Riemanniana\\
+    $tr$ & traço \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
 \section{Commented and Expanded Abstract}
 
