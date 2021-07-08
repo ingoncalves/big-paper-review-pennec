@@ -246,12 +246,14 @@ estimar o parâmetro desconhecido $\sigma$ (variância da distribuição).
 de distribuições normais é o Estimador de Máxima Verossimilhança (MLE), o qual
 estima os valores dos diferentes parâmetros do modelo estatístico de maneira a
 maximizar a probabilidade dos dados observados, ou seja, busca-se parâmetros
-que maximizem a função de verossimilhança. A estimativa MLE da variância
-$\hat{\sigma_N}$ é dada pela solução da Equação~(8). Note que esta equação
-depende do valor de $\zeta(\sigma)$, o qual foi tabelado pela integração de
-Monte Carlo. Entretanto, esta aproximação apresenta instabilidades que degradam
-a eficiência da estimação $\hat{\sigma_N}$. O problema fica ainda pior quando
-se aumenta o valor da variância $\sigma$ ou da dimensão da variedade $m$.  
+que maximizem a função de verossimilhança. Geralmente, a função de
+verossimilhança é dada pelo do logaritmo da função dos parâmetros
+desconhecidos. A estimativa MLE da variância $\hat{\sigma_N}$ é dada pela
+solução da Equação~(8). Note que esta equação depende do valor de
+$\zeta(\sigma)$, o qual foi tabelado pela integração de Monte Carlo.
+Entretanto, esta aproximação apresenta instabilidades que degradam a eficiência
+da estimação $\hat{\sigma_N}$. O problema fica ainda pior quando se aumenta o
+valor da variância $\sigma$ ou da dimensão da variedade $m$.  
 
 \begin{center}
   \vspace{1em}
@@ -268,11 +270,312 @@ instrumental matemático que possibilitará a análise de distribuições
 Riemannianas em variedades de altas dimensões, com ampla aplicação em problemas
 reais.
 
-%\begin{center}
-  %\vspace{1em}
-  %\frame{\includegraphics[width=0.8\linewidth]{figs/figure-1.png}}
-  %\vspace{1em}
-%\end{center}
+\section{Commented and Expanded Section 3: Parameters Estimate}
+Nesta seção é apresentada uma técnica de estimação de parâmetros de
+distribuições Gaussianas multivariadas aplicadas em variedades Riemannianas.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-02-paragraph-03.png}}
+  \vspace{1em}
+\end{center}
+
+Vale reforçar que o grande desafio de se estimar parâmetros de distribuições
+Gaussianas Riemannianas de alta dimensão é devido à complexidade do modelo
+analítico que descreve matemáticamente esta distribuição. Tipicamente, quando
+a solução analítica é impraticável ou demasiadamente complexa, recorre-se à
+técnicas numéricas que possibilitam encontrar aproximações para a solução do
+problema em questão.
+
+Para estimar a variância $\sigma$ da distribuição Gaussian Riemanniana de alta
+dimensão, os autores propoem uma técnica numérica que proverá uma aproximação
+para esta quantidade. Parte-se inicialmente de uma transformação não-linear
+$\eta = \frac{-1}{\sigma^2}$ que possibilita a construção de uma função de
+verossimilhança $\psi(\eta) = \log \zeta(\eta)$ estritamente convexa, ou seja,
+$\psi^{''}(\eta) > 0\,, \forall \eta$. Posteriormente, a função
+$\log \zeta(\eta)$ é avaliada numéricamente para alguns valores de $\eta$,
+utilizando integrações de Monte Carlo. Em posse destas aproximações, a função
+$\phi(\eta)$ pode ser finalmente interpolada através de \textit{splines cúbicos}. 
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-02-paragraph-04.png}}
+  \vspace{1em}
+\end{center}
+
+Em matemática, os \textit{Splines} são um tipo especial de função defina por
+dois ou mais pontos de controle, cujo grau é escolhido por projeto. Através
+desta técnica, é possível construir uma curva que passa por todos os pontos
+de controle, ou seja, uma curva que interpola os intervalos entre estes pontos
+~\cite{ruggiero1996calculo}. Nas splines cúbicas, determina-se um
+polinômio interpolador ou aproximador de terceiro grau com restrições que
+garantam uma curva suave, ou seja, onde a primeira e segunda derivadas são
+contínuas.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/figure-01.png}}
+  \vspace{1em}
+\end{center}
+
+A figura acima mostra o valor estimado da variância da distribuição Gaussiana
+Riemanniana $\hat{\sigma}_n$ em função do erro médio quadrático (SMR)
+$\mathcal{E}_N(\hat{C}_N)$ para quatro condições diferentes. Os gráficos a
+esquerda referem-se à uma variedade $\mathcal{P}_m$ de dimensão $m=4$ e os
+gráficos a direita de dimensão $m=22$. Os gráficos superiores utilizam os
+valores tabulados através do estimador de Monte Carlo. Os gráficos inferiores,
+os valores foram aproximados através dos splines cúbicos.
+
+Para ambos os estimadores, pode-se notar diretamente que o erro médio
+quadrático cresce em função da variância. Entretanto, a função variância
+aproximada pelo estimador de Monte Carlo é descontínua dentro do intervalo de
+operação, apresentando variações abruptas ao longo da curva. Para alta
+dimensão, este problema é ainda mais evidente e intensificado. Em contra
+partida, a aproximação por splines cúbicos resulta em uma função aproximada
+mais suave em toda a faixa de operação, tanto em baixa quanto em alta dimensão.
+Este resultado se deve às restrições se suavidade impostas na técnica dos
+splines cúbicos, que garantem a existência e a continuidade da primeira e
+segunda derivadas.  
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-02-paragraph-05.png}}
+  \vspace{1em}
+\end{center}
+
+Por definição, os splines cúbicos não são globalmente convexos, ou seja,
+de forma geral, não existem restrições quanto ao módulo da segunda derivada
+em todo o domínio da interpolação. Portanto, pode-se construir os splines
+cúbicos através de convoluções de forma a preservar a convexidade global
+do polinômio aproximador (\textit{fit})~\cite{convexsplines}. Os autores
+implementaram esta técnica de splines por convoluções com o auxílio da
+ferramenta SML do Matlab\cite{d2009slm}, a qual proporciona a construção de
+curvas a partir de pontos de forma mais simplificada.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/figure-02.png}}
+  \vspace{1em}
+\end{center}
+
+A figura acima mostra em azul o conjunto de pontos da função
+$\psi(\eta) = \log \zeta(\eta)$ aproximados pelo método de Monte Carlo.
+A função que aproxima a distribução dos pontos (função de \textit{fitting})
+está representada em vermelho. Vale notar que, para este caso, a dimensão da
+variedade $P_m$ é $m=22$. Esta função de fitting foi constuída através dos
+splines cúbicos a partir de nós de controle igualmente espaçados (linhas
+verticais em verde), utlizando a restrição de convexidade global citada
+anteriormente. Nota-se visualmente que a função de fitting consegue modelar
+bem conjunto de dados, porém os autores não apresentam nenhuma medida de
+concordância ou alguma análise de erro de aproximação. Este tipo de análise
+qualitativa é fundamental para se verificar o quão bem um modelo representa
+os dados estudados.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-03-paragraph-01.png}}
+  \vspace{1em}
+\end{center}
+
+Relembrando, o objetivo é estimar a variância $\hat{\sigma}_N$ da distribução
+Gaussiana Riemannian $\zeta(\sigma)$ (Equação~(6)) através da maximização da
+função de verossimilhança $\psi(\eta)$ (Equação~(9)), a qual depende do
+conhecimento de $\log \zeta(\eta)$, cuja solução analítica é impraticável.
+Para contornar o problema, a função $\log \zeta(\eta)$ foi aproximada para
+alguns valores de $\eta$ através do método de Monte Carlo e, em posse destes
+pontos aproximados, uma função de fitting contínua foi construída pelo métodos
+dos splines cúbicos globalmente convexos. Desta forma, tem-se todos os
+elementos para estimar a variância $\hat{\sigma}_N$.
+
+\section{Commented and Expanded Section 4: Results}
+Nesta seção os resultados obtidos nas análises de sinais com EEG utilizando
+técnicas baseadas em Variedades Riemannianas são apresentados.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-03-paragraph-02.png}}
+  \vspace{1em}
+\end{center}
+
+Como ambiente experimental, os autores utilizam sinais de Eletroencefalografia
+(EEG) capturados através de eletrodos localizados ao longo do couro cabeludo de
+um indivíduo. Através destes sinais, busca-se analisar o mapeamento espacial
+através da matriz de covariância entre os eletrodos, a qual pode ser utilizada
+para caracterizar padrões mentais. Portanto, trata-se de um problema de
+classificação onde o modelo de distribuição Gaussiana Riemanniana pode ser
+útil.
+
+A geometria Riemanniana é um ramo da geometria diferencial que estuda
+variedades suaves, espaços curvos com geometrias peculiares. Nestes espaços as
+noções de ângulos, caminho mais curto entre dois pontos, distâncias, centro de
+massa de vários pontos, etc., permitem estudar propriedades analíticas de
+operadores matemáticos de uma perspectiva geométrica, tornando-os acessíveis à
+intuição~\cite{levi1925lezioni,congedo2019riemannian}.
+
+No contexto de Eletroencefalografia multivariada, a variedade de matrizes
+simétricas positivas-definidas $\mathcal{P}_m$ tem se mostrado muito útil, uma
+vez que dados de EEG em janelas de tempo finitas podem ser efetivamente
+mapeados como pontos nesta variedade através da estimação de parâmetros de sua
+matriz de covariância. Esta abordagem levou à introdução de classificadores com
+características notáveis em comparação com o estado da
+arte~\cite{congedo2019riemannian}.
+
+Devido à complexidade de se determinar um modelo probabilístico que governa
+o processo estocástico associado aos sinais de EEG, tipicamente adota-se um
+procedimento de classificação baseada na Mínima Distatância para a Média (da
+sigla em inglês, MDM). Em particular, este classificado, embora não seja o mais
+preciso entre os classificadores Riemannianos, destaca-se por sua simplicidade
+e eficiência computacional. É um classificador totalmente determinístico e
+livre de parâmetros, portanto, nenhum parâmetro precisa ser ajustado por
+validação cruzada ou outros métodos que possam comprometer sua
+generalização~\cite{congedo2019riemannian}.
+
+O MDM é definido pela Equação~(10), onde dados os grupos $K$ e uma fase de
+treinamento onde os baricentros $\hat{C}(k)$ dos grupos $(k=1,\ldots,K)$ são
+estimados, associa-se uma nova observação $C_i$ ao grupo $\hat{K}$ de acordo
+com a regra de classificação baseda na mínima distância $d_R$.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-03-paragraph-03.png}}
+  \vspace{1em}
+\end{center}
+
+Com o objetivo de possibilitar modelos de distribuição de probabilidade mais
+gerais, os autores utilizam uma combinação linear de várias distribuições
+Gaussianas (\textit{Gaussian Mixturues (GM)}), definida pela Equação~(12).
+Uma extensão do algorítmo \textit{Expectation-Maximisation} (EM) é utilizada
+para calcular as estimações de máxima verossimilhança dos parâmetros da
+distribuição Gaussiana mista. Este algorítmo utiliza uma regra de classificação
+ótima de Bayes, usando probabilidades de classificação a posteri para melhorar
+a eficiência de estimação.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-03-paragraph-04.png}}
+  \vspace{1em}
+\end{center}
+
+Os autores utilizaram dois grupos ($K=2$), os quais são caracterizados por
+valores de $\sigma$ distintos, sendo $\sigma(1) = 0.15$ e $\sigma(2) = 0.17$.
+De forma análoga à distribuições Gaussianas em geral, o parâmetro $\sigma$
+refere-se a dispersão, ou variância, dos dados na variedade Riemanniana.  
+$\bar{C}(1)$ corresponde à matriz identidade e quatro diferentes cenários serão
+considerados, incrementando gradualmente a distância
+$d_R(\bar{C}(2), \bar{C}(1))$. Os autores geram 60 matrizes SPD para cada
+amostra e repetem o mesmo experiemento por cinco vezes para cada cenário.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/table-01.png}}
+  \vspace{1em}
+\end{center}
+
+A tabela acima mostra a acurácia de classificação média em porcentagem das
+cinco rodadas de cada um dos quatro cenários. São apresentados os resultados
+de dois classificadores, o MDM e o classificador de Bayes utilizando uma
+distribuição Gaussiana simples, ou seja, GM com $M=1$. Os resultados foram
+obtidos através de um processo de validação cruzada, subdividindo o conjunto de
+dados em 30 partes e repetindo o processo de classificação 30 vezes usando cada
+parte como conjunto de teste e as demais como conjunto de treinamento.
+Pode-se notar que o classificador de Bayes apresenta melhor eficiência em
+termos de acurácia média para toda a faixa de distância avaliada, em especial
+para os valores de baixa amplitude. Também vale notar que quando os dois
+baricentros estão muito pertos, ou seja, quando o valor de $d_R$ é pequeno,
+as variantes de cada grupo são a única forma de classificar corretamente.
+Conforme a distância $d_R$ aumenta, o desempenho dos dois classificadores se
+aproxima, até a situação limite do cenário 4, onde os baricentros estão muito
+distantes e a variabilidade não é mais essencial para obter bons desempenhos de
+classificação.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-04-paragraph-01.png}}
+  \vspace{1em}
+\end{center}
+
+Agora serão analisados dados reais de EEG de nove indivíduos que executam
+quatro tipos de imagens motoras (movimentos imaginados da mão direita, mão
+esquerda, pé e língua). Desta forma, neste experimento há quatro grupos de
+classificação, ou seja, $K=4$. O conjunto de dados contém 144 amostras de cada
+classe para cada um dos indivíduos. Estes sinais de EEG são caturados através
+de 22 eletrodos, e portanto, as matrizes de covariância pertencem à variedade
+$\mathcal{P}_{22}$.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/table-02.png}}
+  \vspace{1em}
+\end{center}
+
+A tabela acima mostra a acurácia obtida através de um processo de validação
+cruzada com 30 subdivisões, considerando o classificador MDM e o classificador
+de Bayes utilizando uma distribuição Gaussiana Mista (GM) com $M$ variando de 1
+a 4.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-04-paragraph-02.png}}
+  \vspace{1em}
+\end{center}
+
+Os resultados apresentados na Tabela 2 são interessantes em dois aspectos.
+Primeiramente, os dados mostram que para todos os indivíduos, o classificador de
+Bayes se mostrou pelo menos tão performático quanto o MDM\@. Segundo, os
+resultados também mostram que o melhor classificador não está sempre associado
+ao mesmo valor de $M$. Isto significa que, mesmo que o procedimento experimental
+seja o mesmo para cada indivíduo, a variabialidade é alta, ou seja, a forma da
+nuvem de dados na variedade Riemanniana é bem distinta entre os indivíduos.
+Este aspecto ainda não foi amplamente estudado na literatura de Geometria
+Riemanniana no contexto de EEG e pode ser um campo promissor para novos
+estudos. Vale ressaltar que os resultados mostrados neste trabalho foram os
+primeiros nesta direção.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-04-paragraph-03.png}}
+  \vspace{1em}
+\end{center}
+
+Outro ponto que merece destaque é relacionado ao custo computacional dos
+procedimentos aqui apresentados. A análise do tempo de processamento depende
+de muitos fatores, como a especificação técnica do hardware utilizado para
+executar a rotina computacional, o sistema operacional que gerencia os recursos
+de máquina, a linguagem de programação, entre outros. Os autores não detalharam
+no paper qual é a característica do maquinário utlizado para obter os resultados
+apresentados. Porém, com o intuito de comparar o tempo de processamento dos
+classicadores executados no mesmo maquinário sob condições semelhantes,
+abordagem apresentada pelos autores pode oferecer uma boa medida.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/table-03.png}}
+  \vspace{1em}
+\end{center}
+
+A tabela acima mostra o tempo de processamento em segundos de cada um dos
+classificadores avaliados através do processo de validação cruzada com 30
+partes considerando apenas um único indivíduo. Vale notar que a integração
+de Monte Carlo e a aproximação por splines são feitas offline e, portanto,
+sem influência no tempo de processamento de classificação. Pode-se observar que
+para $M=1$ (Gaussiana simples), os tempos de processamento dos classificadores
+MDM e Bayes são muito próximos. Contudo, incrementando o valor de $M$
+(Gaussiana Mista), o tempo de processamento também aumenta.
+
+\begin{center}
+  \vspace{1em}
+  \frame{\includegraphics[width=0.8\linewidth]{figs/page-04-paragraph-04.png}}
+  \vspace{1em}
+\end{center}
+
+Concluindo, neste trabalho técnicas de estimação de parâmetros baseadas em
+Geometria Riemanniana foram aplicadas para o problema de classificação no
+contexto de EEG\@. Em particular, foi introduzida uma abordagem de aproximação
+por splines cúbicos convexos que se mostrou coerente com resultados
+consolidados na literatura. Logo, distribuições Riemannianas podem ser
+empregadas em qualquer dimensão, para análise de classificação, introduzindo
+classificadores Bayesianos, ou observando a estrutura da nuvens de dados na
+variedade Riemanniana.  
 
 \bibliographystyle{ieeetr}
 \bibliography{refs}
