@@ -282,18 +282,18 @@ distribuições Gaussianas multivariadas aplicadas em variedades Riemannianas.
 
 Vale reforçar que o grande desafio de se estimar parâmetros de distribuições
 Gaussianas Riemannianas de alta dimensão é devido à complexidade do modelo
-analítico que descreve matemáticamente esta distribuição. Tipicamente, quando
+analítico que descreve matematicamente esta distribuição. Tipicamente, quando
 a solução analítica é impraticável ou demasiadamente complexa, recorre-se à
 técnicas numéricas que possibilitam encontrar aproximações para a solução do
 problema em questão.
 
 Para estimar a variância $\sigma$ da distribuição Gaussian Riemanniana de alta
-dimensão, os autores propoem uma técnica numérica que proverá uma aproximação
+dimensão, os autores propõem uma técnica numérica que proverá uma aproximação
 para esta quantidade. Parte-se inicialmente de uma transformação não-linear
 $\eta = \frac{-1}{\sigma^2}$ que possibilita a construção de uma função de
 verossimilhança $\psi(\eta) = \log \zeta(\eta)$ estritamente convexa, ou seja,
 $\psi^{''}(\eta) > 0\,, \forall \eta$. Posteriormente, a função
-$\log \zeta(\eta)$ é avaliada numéricamente para alguns valores de $\eta$,
+$\log \zeta(\eta)$ é avaliada numericamente para alguns valores de $\eta$,
 utilizando integrações de Monte Carlo. Em posse destas aproximações, a função
 $\phi(\eta)$ pode ser finalmente interpolada através de \textit{splines cúbicos}. 
 
@@ -360,11 +360,11 @@ curvas a partir de pontos de forma mais simplificada.
 
 A figura acima mostra em azul o conjunto de pontos da função
 $\psi(\eta) = \log \zeta(\eta)$ aproximados pelo método de Monte Carlo.
-A função que aproxima a distribução dos pontos (função de \textit{fitting})
+A função que aproxima a distribuição dos pontos (função de \textit{fitting})
 está representada em vermelho. Vale notar que, para este caso, a dimensão da
-variedade $P_m$ é $m=22$. Esta função de fitting foi constuída através dos
+variedade $P_m$ é $m=22$. Esta função de fitting foi construída através dos
 splines cúbicos a partir de nós de controle igualmente espaçados (linhas
-verticais em verde), utlizando a restrição de convexidade global citada
+verticais em verde), utilizando a restrição de convexidade global citada
 anteriormente. Nota-se visualmente que a função de fitting consegue modelar
 bem conjunto de dados, porém os autores não apresentam nenhuma medida de
 concordância ou alguma análise de erro de aproximação. Este tipo de análise
@@ -377,7 +377,7 @@ os dados estudados.
   \vspace{1em}
 \end{center}
 
-Relembrando, o objetivo é estimar a variância $\hat{\sigma}_N$ da distribução
+Relembrando, o objetivo é estimar a variância $\hat{\sigma}_N$ da distribuição
 Gaussiana Riemannian $\zeta(\sigma)$ (Equação~(6)) através da maximização da
 função de verossimilhança $\psi(\eta)$ (Equação~(9)), a qual depende do
 conhecimento de $\log \zeta(\eta)$, cuja solução analítica é impraticável.
@@ -422,7 +422,7 @@ arte~\cite{congedo2019riemannian}.
 
 Devido à complexidade de se determinar um modelo probabilístico que governa
 o processo estocástico associado aos sinais de EEG, tipicamente adota-se um
-procedimento de classificação baseada na Mínima Distatância para a Média (da
+procedimento de classificação baseada na Mínima Distância para a Média (da
 sigla em inglês, MDM). Em particular, este classificado, embora não seja o mais
 preciso entre os classificadores Riemannianos, destaca-se por sua simplicidade
 e eficiência computacional. É um classificador totalmente determinístico e
@@ -433,7 +433,7 @@ generalização~\cite{congedo2019riemannian}.
 O MDM é definido pela Equação~(10), onde dados os grupos $K$ e uma fase de
 treinamento onde os baricentros $\hat{C}(k)$ dos grupos $(k=1,\ldots,K)$ são
 estimados, associa-se uma nova observação $C_i$ ao grupo $\hat{K}$ de acordo
-com a regra de classificação baseda na mínima distância $d_R$.
+com a regra de classificação baseada na mínima distância $d_R$.
 
 \begin{center}
   \vspace{1em}
@@ -443,11 +443,11 @@ com a regra de classificação baseda na mínima distância $d_R$.
 
 Com o objetivo de possibilitar modelos de distribuição de probabilidade mais
 gerais, os autores utilizam uma combinação linear de várias distribuições
-Gaussianas (\textit{Gaussian Mixturues (GM)}), definida pela Equação~(12).
-Uma extensão do algorítmo \textit{Expectation-Maximisation} (EM) é utilizada
+Gaussianas (\textit{Gaussian Mixtures (GM)}), definida pela Equação~(12).
+Uma extensão do algoritmo \textit{Expectation-Maximisation} (EM) é utilizada
 para calcular as estimações de máxima verossimilhança dos parâmetros da
-distribuição Gaussiana mista. Este algorítmo utiliza uma regra de classificação
-ótima de Bayes, usando probabilidades de classificação a posteri para melhorar
+distribuição Gaussiana mista. Este algoritmo utiliza uma regra de classificação
+ótima de Bayes, usando probabilidades de classificação a posteriori para melhorar
 a eficiência de estimação.
 
 \begin{center}
@@ -463,7 +463,7 @@ refere-se a dispersão, ou variância, dos dados na variedade Riemanniana.
 $\bar{C}(1)$ corresponde à matriz identidade e quatro diferentes cenários serão
 considerados, incrementando gradualmente a distância
 $d_R(\bar{C}(2), \bar{C}(1))$. Os autores geram 60 matrizes SPD para cada
-amostra e repetem o mesmo experiemento por cinco vezes para cada cenário.
+amostra e repetem o mesmo experimento por cinco vezes para cada cenário.
 
 \begin{center}
   \vspace{1em}
@@ -481,7 +481,7 @@ parte como conjunto de teste e as demais como conjunto de treinamento.
 Pode-se notar que o classificador de Bayes apresenta melhor eficiência em
 termos de acurácia média para toda a faixa de distância avaliada, em especial
 para os valores de baixa amplitude. Também vale notar que quando os dois
-baricentros estão muito pertos, ou seja, quando o valor de $d_R$ é pequeno,
+baricentros estão muito perto, ou seja, quando o valor de $d_R$ é pequeno,
 as variantes de cada grupo são a única forma de classificar corretamente.
 Conforme a distância $d_R$ aumenta, o desempenho dos dois classificadores se
 aproxima, até a situação limite do cenário 4, onde os baricentros estão muito
@@ -498,7 +498,7 @@ Agora serão analisados dados reais de EEG de nove indivíduos que executam
 quatro tipos de imagens motoras (movimentos imaginados da mão direita, mão
 esquerda, pé e língua). Desta forma, neste experimento há quatro grupos de
 classificação, ou seja, $K=4$. O conjunto de dados contém 144 amostras de cada
-classe para cada um dos indivíduos. Estes sinais de EEG são caturados através
+classe para cada um dos indivíduos. Estes sinais de EEG são capturados através
 de 22 eletrodos, e portanto, as matrizes de covariância pertencem à variedade
 $\mathcal{P}_{22}$.
 
@@ -524,7 +524,7 @@ Primeiramente, os dados mostram que para todos os indivíduos, o classificador d
 Bayes se mostrou pelo menos tão performático quanto o MDM\@. Segundo, os
 resultados também mostram que o melhor classificador não está sempre associado
 ao mesmo valor de $M$. Isto significa que, mesmo que o procedimento experimental
-seja o mesmo para cada indivíduo, a variabialidade é alta, ou seja, a forma da
+seja o mesmo para cada indivíduo, a variabilidade é alta, ou seja, a forma da
 nuvem de dados na variedade Riemanniana é bem distinta entre os indivíduos.
 Este aspecto ainda não foi amplamente estudado na literatura de Geometria
 Riemanniana no contexto de EEG e pode ser um campo promissor para novos
@@ -542,9 +542,9 @@ procedimentos aqui apresentados. A análise do tempo de processamento depende
 de muitos fatores, como a especificação técnica do hardware utilizado para
 executar a rotina computacional, o sistema operacional que gerencia os recursos
 de máquina, a linguagem de programação, entre outros. Os autores não detalharam
-no paper qual é a característica do maquinário utlizado para obter os resultados
+no paper qual é a característica do maquinário utilizado para obter os resultados
 apresentados. Porém, com o intuito de comparar o tempo de processamento dos
-classicadores executados no mesmo maquinário sob condições semelhantes,
+classificadores executados no mesmo maquinário sob condições semelhantes,
 abordagem apresentada pelos autores pode oferecer uma boa medida.
 
 \begin{center}
