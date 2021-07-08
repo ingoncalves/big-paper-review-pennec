@@ -22,7 +22,6 @@
 *~
 *.~*#
 *.synctex.gz
-main.pdf
 main.out
 paper.pdf
 paper.out
