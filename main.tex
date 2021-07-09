@@ -51,8 +51,8 @@ cuja primeira página está reproduzida na Figura~\ref{fig:paper:page1}.
 O presente texto é uma versão comentada do artigo,
 expandindo o máximo possível os conceitos ligados a Variedades Diferenciáveis.
 Desta forma, o presente texto é um superconjunto do referido artigo.
-Ele contém todo o artigo, possivelmente em forma de recortes, com expansões e
-comentários, e conexões com outros conceitos.
+Ele contém todo o artigo em forma de recortes, com expansões, comentários, e
+conexões com outros conceitos.
 
 \begin{figure}
 \centering
@@ -63,15 +63,9 @@ Primeira página do artigo sendo revisado. Acessível pela URL
 }\label{fig:paper:page1}
 \end{figure}
 
-Será utilizada uma mistura de línguas nesta revisão, sendo o inglês preferido
-sempre que possível. Sendo assim, não teremos o trabalho de traduzir do inglês
-algumas construções básicas do \LaTeX\ como \emph{Theorem} ou
-\emph{Definition}.
-
-
 \section{Tabela de Notação}
 
-\begin{table}[h]
+\begin{table}[H]
   \begin{tabularx}{\textwidth}{@{}XX@{}}
     \toprule
     $m$ & dimensão da variedade \\
@@ -179,7 +173,7 @@ method}) com suas variantes \textit{Exact Hessian}, \textit{Hessian by
 decomposition}, \textit{Hessian by approximation} e ainda o
 \textit{Broyden–Fletcher–Goldfarb–Shanno} (BFGS).
 
-Entretanto, o conceito de centro de massa Riemannian tem sido amplamente
+Entretanto, o conceito de centro de massa Riemanniano tem sido amplamente
 utilizado para definir e caracterizar um conjunto de pontos. Pouca atenção
 tem-se dado para a caracterização da forma (ou \textit{shape}) das amostras na
 própria variedade Riemanniana, o que possibilitaria caracterizar o modelo
@@ -205,18 +199,17 @@ $\sigma > 0$.
   \vspace{1em}
 \end{center}
 
-O modelo de distribuição Gaussiana Riemanniana pode estendido para combinações
-de distribuições Gaussianas Riemannianas, útil para descrever uma ampla
-variedade de modelos probabilísticos. Estas construções tem sido utilizadas
-para melhorar a performance de classificação de matrizes SPD no contexto de
-imagens texturizadas, porém apesar dos bons resultados apresentados na
-literatura, as análises até aqui tem se limitado em variedades de apenas duas
-dimensões ($\mathcal{P}_2$). Contudo, para muitos outros problemas práticos,
-como a análise de matrizes de covariância em Eletroencefalografia, lida-se com
-fenômenos de alta dimensão onde o problema de estimação de parâmetros se torna
-mais desafiador. Este trabalho se insere neste contexto, apresentando técnicas
-para superar estas limitações.
-
+O modelo de distribuição Gaussiana Riemanniana pode ser estendido para
+combinações de distribuições Gaussianas Riemannianas, úteis para descrever uma
+ampla variedade de modelos probabilísticos. Estas construções tem sido
+utilizadas para melhorar a performance de classificação de matrizes SPD no
+contexto de imagens texturizadas, porém apesar dos bons resultados apresentados
+na literatura, as análises até aqui tem se limitado em variedades de apenas
+duas dimensões ($\mathcal{P}_2$). Contudo, para muitos outros problemas
+práticos, como a análise de matrizes de covariância em Eletroencefalografia,
+lida-se com fenômenos de alta dimensão onde o problema de estimação de
+parâmetros se torna mais desafiador. Este trabalho se insere neste contexto,
+apresentando técnicas para superar estas limitações.  
 
 \section{Commented and Expanded Section 2: Riemannian Gaussian Distribution}
 Nesta seção os conceitos de Distribuição Gaussiana Riemanniana serão derivados
@@ -250,7 +243,7 @@ limitação.
 
 Os autores evidenciam este problema na Equação~(6), onde pode-se notar
 a complexidade da formulação do fator de normalização $\zeta(\sigma)$. A
-técnica utilizada para avaliar $\zeta(\sigma)$ foi através da tabulação do
+técnica utilizada para avaliar $\zeta(\sigma)$ computa uma tabulação do
 valor da função para alguns valores de $\sigma$ utilizando integrações de Monte
 Carlo.  Este método de integração numérica utiliza números aleatórios para
 aproximar o valor da integral multivariada~(\cite{caflisch1998monte}).
@@ -309,7 +302,7 @@ $\eta = \frac{-1}{\sigma^2}$ que possibilita a construção de uma função de
 verossimilhança $\psi(\eta) = \log \zeta(\eta)$ estritamente convexa, ou seja,
 $\psi^{''}(\eta) > 0\,, \forall \eta$. Posteriormente, a função
 $\log \zeta(\eta)$ é avaliada numericamente para alguns valores de $\eta$,
-utilizando integrações de Monte Carlo. Em posse destas aproximações, a função
+utilizando integrações de Monte Carlo. De posse destas aproximações, a função
 $\phi(\eta)$ pode ser finalmente interpolada através de \textit{splines cúbicos}. 
 
 \begin{center}
@@ -334,7 +327,7 @@ contínuas.
 \end{center}
 
 A figura acima mostra o valor estimado da variância da distribuição Gaussiana
-Riemanniana $\hat{\sigma}_n$ em função do erro médio quadrático (SMR)
+Riemanniana $\hat{\sigma}_n$ em função do erro médio quadrático (MSE)
 $\mathcal{E}_N(\hat{C}_N)$ para quatro condições diferentes. Os gráficos a
 esquerda referem-se à uma variedade $\mathcal{P}_m$ de dimensão $m=4$ e os
 gráficos a direita de dimensão $m=22$. Os gráficos superiores utilizam os
@@ -345,12 +338,12 @@ Para ambos os estimadores, pode-se notar diretamente que o erro médio
 quadrático cresce em função da variância. Entretanto, a função variância
 aproximada pelo estimador de Monte Carlo é descontínua dentro do intervalo de
 operação, apresentando variações abruptas ao longo da curva. Para alta
-dimensão, este problema é ainda mais evidente e intensificado. Em contra
-partida, a aproximação por splines cúbicos resulta em uma função aproximada
-mais suave em toda a faixa de operação, tanto em baixa quanto em alta dimensão.
-Este resultado se deve às restrições se suavidade impostas na técnica dos
-splines cúbicos, que garantem a existência e a continuidade da primeira e
-segunda derivadas.  
+dimensão, este problema é ainda mais evidente e intensificado. Em
+contrapartida, a aproximação por splines cúbicos resulta em uma função
+aproximada mais suave em toda a faixa de operação, tanto em baixa quanto em
+alta dimensão. Este resultado se deve às restrições se suavidade impostas na
+técnica dos splines cúbicos que garantem a existência e a continuidade da
+primeira e segunda derivadas.  
 
 \begin{center}
   \vspace{1em}
@@ -360,7 +353,7 @@ segunda derivadas.
 
 Por definição, os splines cúbicos não são globalmente convexos, ou seja,
 de forma geral, não existem restrições quanto ao módulo da segunda derivada
-em todo o domínio da interpolação. Portanto, pode-se construir os splines
+em todo o domínio da interpolação. Contudo, pode-se construir os splines
 cúbicos através de convoluções de forma a preservar a convexidade global
 do polinômio aproximador (\textit{fit})~\cite{convexsplines}. Os autores
 implementaram esta técnica de splines por convoluções com o auxílio da
@@ -397,7 +390,7 @@ Gaussiana Riemannian $\zeta(\sigma)$ (Equação~(6)) através da maximização d
 função de verossimilhança $\psi(\eta)$ (Equação~(9)), a qual depende do
 conhecimento de $\log \zeta(\eta)$, cuja solução analítica é impraticável.
 Para contornar o problema, a função $\log \zeta(\eta)$ foi aproximada para
-alguns valores de $\eta$ através do método de Monte Carlo e, em posse destes
+alguns valores de $\eta$ através do método de Monte Carlo e, de posse destes
 pontos aproximados, uma função de fitting contínua foi construída pelo métodos
 dos splines cúbicos globalmente convexos. Desta forma, tem-se todos os
 elementos para estimar a variância $\hat{\sigma}_N$.
@@ -438,7 +431,7 @@ arte~\cite{congedo2019riemannian}.
 Devido à complexidade de se determinar um modelo probabilístico que governa
 o processo estocástico associado aos sinais de EEG, tipicamente adota-se um
 procedimento de classificação baseada na Mínima Distância para a Média (da
-sigla em inglês, MDM). Em particular, este classificado, embora não seja o mais
+sigla em inglês, MDM). Em particular, este classificador, embora não seja o mais
 preciso entre os classificadores Riemannianos, destaca-se por sua simplicidade
 e eficiência computacional. É um classificador totalmente determinístico e
 livre de parâmetros, portanto, nenhum parâmetro precisa ser ajustado por
@@ -477,8 +470,8 @@ De forma análoga à distribuições Gaussianas em geral, o parâmetro $\sigma$
 refere-se a dispersão, ou variância, dos dados na variedade Riemanniana.  
 $\bar{C}(1)$ corresponde à matriz identidade e quatro diferentes cenários serão
 considerados, incrementando gradualmente a distância
-$d_R(\bar{C}(2), \bar{C}(1))$. Os autores geram 60 matrizes SPD para cada
-amostra e repetem o mesmo experimento por cinco vezes para cada cenário.
+$d_R(\bar{C}(2), \bar{C}(1))$. Os autores geraram 60 matrizes SPD para cada
+amostra e repetiram o mesmo experimento por cinco vezes para cada cenário.
 
 \begin{center}
   \vspace{1em}
@@ -544,7 +537,7 @@ nuvem de dados na variedade Riemanniana é bem distinta entre os indivíduos.
 Este aspecto ainda não foi amplamente estudado na literatura de Geometria
 Riemanniana no contexto de EEG e pode ser um campo promissor para novos
 estudos. Vale ressaltar que os resultados mostrados neste trabalho foram os
-primeiros nesta direção.
+pioneiros nesta direção.
 
 \begin{center}
   \vspace{1em}
@@ -572,10 +565,10 @@ A tabela acima mostra o tempo de processamento em segundos de cada um dos
 classificadores avaliados através do processo de validação cruzada com 30
 partes considerando apenas um único indivíduo. Vale notar que a integração
 de Monte Carlo e a aproximação por splines são feitas offline e, portanto,
-sem influência no tempo de processamento de classificação. Pode-se observar que
-para $M=1$ (Gaussiana simples), os tempos de processamento dos classificadores
-MDM e Bayes são muito próximos. Contudo, incrementando o valor de $M$
-(Gaussiana Mista), o tempo de processamento também aumenta.
+não têm influência no tempo de processamento de classificação. Pode-se observar
+que para $M=1$ (Gaussiana simples), os tempos de processamento dos
+classificadores MDM e Bayes são muito próximos. Contudo, incrementando o valor
+de $M$ (Gaussiana Mista), o tempo de processamento também aumenta.
 
 \begin{center}
   \vspace{1em}
